@@ -5,16 +5,16 @@
   --mx: 0;
   --my: 0;
   position: relative;
-  /* un peu moins haut que l'écran : la section suivante arrive plus vite */
-  height: 86vh;
-  height: 86svh;
-  min-height: 560px;
+  /* un peu moins haut que l'écran : la section suivante arrive plus vite,
+     mais il grandit si son contenu a besoin de place (petits écrans) */
+  min-height: max(560px, 86vh);
+  min-height: max(560px, 86svh);
   overflow: hidden;
   background: #0c0d0f;
 }
 .hero__stage {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  min-height: inherit;
   perspective: 1600px;
 }
 
@@ -83,15 +83,16 @@
 
 /* ---------- 1. L'ouverture ---------- */
 .opening {
-  position: absolute;
-  inset: 0;
+  position: relative;
   z-index: 3;
+  min-height: inherit;
   display: grid;
   place-content: center;
   justify-items: center;
-  padding: clamp(96px, 12vh, 128px) var(--gutter) 0;
+  /* en haut : la place du menu ; en bas : un peu plus de marge pour que le contenu
+     soit légèrement remonté sans jamais passer sous le menu */
+  padding: clamp(104px, 13vh, 128px) var(--gutter) max(72px, 10vh);
   text-align: center;
-  transform: translateY(-5vh);
 }
 .opening__kicker {
   display: inline-flex;
@@ -110,7 +111,7 @@
   margin: 0.32em 0 0.3em;
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(3.4rem, 10.5vw, 10rem);
+  font-size: clamp(3.4rem, min(10.5vw, 17vh), 10rem);
   line-height: 0.86;
   letter-spacing: -0.035em;
   color: #f5efe4;
