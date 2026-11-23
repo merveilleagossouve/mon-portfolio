@@ -1,0 +1,784 @@
+/* ---------- 03 · Projets ---------- */
+.projects {
+  --progress: 0;
+  position: relative;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--bg-deep) 75%, transparent);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.projects__track {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 70px var(--gutter) 90px;
+  width: max-content;
+  will-change: transform;
+}
+@media (min-width: 1440px) {
+  .projects__track {
+    padding-left: calc((100vw - var(--container)) / 2 + var(--gutter));
+  }
+}
+.projects__intro {
+  width: min(520px, 80vw);
+  flex: none;
+  padding-right: 20px;
+}
+.projects__intro .section-head {
+  margin-bottom: 28px;
+}
+.projects__intro > p {
+  color: var(--ink-soft);
+  max-width: 420px;
+}
+.projects__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 26px;
+  color: var(--ink-mute) !important;
+}
+
+.projects__progress {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 40px;
+  height: 1px;
+  background: var(--line);
+}
+.projects__progress span {
+  position: absolute;
+  inset: 0;
+  background: var(--blend);
+  transform-origin: left;
+  transform: scaleX(var(--progress));
+}
+
+/* Carte qui se retourne */
+.pcard-tilt {
+  --rx: 0deg;
+  --ry: 0deg;
+  --gx: 50%;
+  --gy: 50%;
+  flex: none;
+  --card-pad: 28px;
+  width: min(540px, 84vw);
+  height: 600px;
+  perspective: 1400px;
+}
+.pcard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.7s var(--ease);
+}
+.pcard.is-flipped {
+  transform: rotateX(var(--rx)) rotateY(calc(180deg + var(--ry)));
+}
+.pcard__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: var(--card-pad);
+  border-radius: calc(var(--radius) + 4px);
+  border: 1px solid var(--line);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.pcard__face--terr {
+  background:
+    radial-gradient(circle at 100% 0%, var(--terr-soft), transparent 55%),
+    var(--surface);
+}
+.pcard__face--code {
+  transform: rotateY(180deg);
+  background:
+    linear-gradient(var(--code-soft) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, var(--code-soft) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--surface);
+}
+.pcard__top {
+  display: flex;
+  justify-content: space-between;
+  color: var(--ink-mute);
+}
+.pcard__side {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.pcard__face--terr .pcard__side {
+  color: var(--terr);
+}
+.pcard__face--code .pcard__side {
+  color: var(--code);
+}
+
+.pcard__name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.pcard__badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 0;
+}
+.pcard__badges:empty {
+  display: none;
+}
+.pcard__text {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+.pcard__role {
+  color: var(--code);
+}
+.pcard__flip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  align-self: center;
+  padding: 11px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: background 0.3s, color 0.3s, gap 0.4s var(--ease);
+}
+.pcard__face--terr .pcard__flip {
+  background: var(--terr);
+  color: var(--on-accent);
+}
+.pcard__face--code .pcard__flip {
+  border: 1px solid var(--line-strong);
+}
+.pcard__flip:hover {
+  gap: 14px;
+}
+.pcard__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+}
+.pcard__actions .pcard__flip {
+  margin-top: 0;
+}
+.pcard__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  background: var(--code);
+  color: var(--on-accent);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.pcard__stack {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.pcard__stack li {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--code) 50%, transparent);
+  background: var(--code-soft);
+  font-size: 0.82rem;
+}
+.pcard__glare {
+  position: absolute;
+  inset: 0;
+  border-radius: calc(var(--radius) + 4px);
+  pointer-events: none;
+  background: radial-gradient(circle at var(--gx) var(--gy), rgba(255, 255, 255, 0.35), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  transform: translateZ(1px);
+}
+.pcard.is-flipped .pcard__glare {
+  transform: rotateY(180deg) translateZ(1px);
+}
+.pcard-tilt:hover .pcard__glare {
+  opacity: 1;
+}
+
+/* Recto : le problème puis la solution */
+.pcard__block {
+  display: grid;
+  gap: 4px;
+}
+.pcard__label {
+  margin: 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--terr);
+}
+.pcard__label--code {
+  color: var(--code);
+}
+.pcard__block .pcard__text {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.pcard__face--terr .pcard__name {
+  margin: 4px 0 0;
+}
+
+/* Verso : l'aperçu dans une fenêtre de navigateur */
+.pshot {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  border: 1px solid var(--line-strong);
+  overflow: hidden;
+  background: #0b0c0e;
+  box-shadow: 0 24px 40px -24px rgba(0, 0, 0, 0.9);
+}
+.pshot__chrome {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--line);
+}
+.pshot__dots {
+  display: flex;
+  gap: 5px;
+}
+.pshot__dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(245, 239, 228, 0.25);
+}
+.pshot__url {
+  flex: 1;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.06);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--ink-mute);
+  text-align: center;
+}
+.pshot__tag {
+  padding: 2px 8px;
+  border-radius: 99px;
+  border: 1px solid color-mix(in srgb, var(--gold) 50%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.pshot__visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  padding: 3px 10px;
+  border-radius: 99px;
+  border: 1px solid color-mix(in srgb, var(--terr) 45%, transparent);
+  background: color-mix(in srgb, var(--terr-soft) 55%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  color: var(--terr);
+  white-space: nowrap;
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+.pshot__visit:hover {
+  background: color-mix(in srgb, var(--terr) 18%, transparent);
+  border-color: color-mix(in srgb, var(--terr) 70%, transparent);
+  color: var(--ink);
+}
+.pshot__screen {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  container-type: inline-size;
+}
+.pshot__screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* l'aperçu entier reste visible, sans couper les côtés */
+  object-position: center;
+}
+/* Vraie capture : le cadre prend exactement la forme de l'image (pas de bandes noires, rien de coupé)
+   et va d'un bord à l'autre de la carte pour être la plus grande possible */
+.pshot--img {
+  flex: none;
+  margin: auto calc(-1 * var(--card-pad));
+  border-radius: 0;
+  border-inline: 0;
+}
+.pshot__zoom {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+.pshot__zoom-hint {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 99px;
+  background: rgba(14, 15, 17, 0.78);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+.pshot__zoom:hover .pshot__zoom-hint,
+.pshot__zoom:focus-visible .pshot__zoom-hint {
+  opacity: 1;
+}
+
+/* La capture en grand, par-dessus tout le site */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 48px);
+  background: rgba(8, 8, 9, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: zoom-out;
+  animation: lightbox-in 0.3s var(--ease);
+}
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.9);
+}
+.lightbox__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(217, 184, 120, 0.55);
+  background: rgba(14, 15, 17, 0.8);
+  color: var(--gold-light);
+  cursor: pointer;
+}
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+}
+.pshot--img .pshot__screen {
+  display: block;
+}
+.pshot--img img {
+  display: block;
+  height: auto;
+}
+
+/* Dernière carte */
+.projects__next {
+  flex: none;
+  width: min(380px, 80vw);
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+  border-radius: calc(var(--radius) + 4px);
+  border: 1px dashed var(--line-strong);
+  transition: background 0.5s var(--ease), border-color 0.5s;
+}
+.projects__next .mono {
+  color: var(--ink-mute);
+}
+.projects__next strong {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  line-height: 1;
+}
+.projects__next em {
+  background: var(--blend);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.projects__next-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.projects__next:hover {
+  border-color: transparent;
+  background: var(--surface);
+}
+
+/* Mobile et tablette : défilement vertical classique */
+@media (max-width: 899px), (prefers-reduced-motion: reduce) {
+  .projects__track {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 40px;
+    padding-bottom: 100px;
+    min-height: 0;
+  }
+  .projects__intro,
+  .pcard-tilt,
+  .projects__next {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .pcard-tilt {
+    height: 660px;
+  }
+  .projects__next {
+    height: auto;
+    min-height: 260px;
+    gap: 30px;
+  }
+  .projects__progress {
+    display: none;
+  }
+}
+
+/* =========================================================
+   Maquettes (FoodStore, VigiBat) : des applis claires, dessinées en code
+   ========================================================= */
+.mock {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3cqw;
+  padding: 4cqw;
+  font-family: var(--font-sans);
+  font-size: 3.2cqw;
+  color: #1c1c1e;
+  overflow: hidden;
+}
+.mock svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.12em;
+}
+.mock b {
+  font-weight: 700;
+}
+.mock small {
+  font-size: 2.7cqw;
+  color: #6b6b70;
+}
+
+/* FoodStore : orange chaleureux */
+.mock--food {
+  background: #fbf6ef;
+}
+.mf__bar,
+.mv__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mf__bar b {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5cqw;
+  font-size: 4.2cqw;
+  color: #e2611f;
+}
+.mf__bar span {
+  display: inline-flex;
+  align-items: center;
+  gap: 1cqw;
+  padding: 1cqw 2.6cqw;
+  border-radius: 99px;
+  background: #fff;
+  font-size: 2.7cqw;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.mf__search {
+  display: flex;
+  align-items: center;
+  gap: 2cqw;
+  padding: 2.4cqw 3.4cqw;
+  border-radius: 3cqw;
+  background: #fff;
+  color: #9a9aa0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.mf__map {
+  position: relative;
+  flex: none;
+  height: 24cqw;
+  border-radius: 3cqw;
+  background: #efe6d6;
+  overflow: hidden;
+}
+.mf__map svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.mf__map path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+.mf__map i {
+  position: absolute;
+  width: 3.4cqw;
+  height: 3.4cqw;
+  margin: -1.7cqw 0 0 -1.7cqw;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: #e2611f;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.mf__map .mf__me {
+  border-radius: 50%;
+  transform: none;
+  background: #2f6fed;
+  border: 0.8cqw solid #fff;
+}
+.mf__title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 3.4cqw;
+}
+.mf__list {
+  display: grid;
+  gap: 2cqw;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mf__list li {
+  display: flex;
+  align-items: center;
+  gap: 2.6cqw;
+  padding: 2cqw;
+  border-radius: 3cqw;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.mf__thumb {
+  flex: none;
+  width: 10cqw;
+  height: 10cqw;
+  border-radius: 2.4cqw;
+  background: linear-gradient(135deg, #f6c27a, #e2611f);
+}
+.mf__list li:nth-child(2) .mf__thumb {
+  background: linear-gradient(135deg, #f4a3a3, #c73b3b);
+}
+.mf__list li:nth-child(3) .mf__thumb {
+  background: linear-gradient(135deg, #f3dc8a, #c9971c);
+}
+.mf__info {
+  flex: 1;
+  display: grid;
+  min-width: 0;
+}
+.mf__info b,
+.mf__info small {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mf__meta {
+  display: grid;
+  justify-items: end;
+}
+.mf__meta svg {
+  color: #f2a31b;
+  fill: #f2a31b;
+}
+
+/* VigiBat : bleu chantier et jaune sécurité */
+.mock--vigi {
+  background: #f3f5f8;
+}
+.mv__bar b {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5cqw;
+  font-size: 4.2cqw;
+  color: #1d3b6e;
+}
+.mv__bar b svg {
+  color: #f2b705;
+}
+.mv__avatar {
+  display: grid;
+  place-items: center;
+  width: 7cqw;
+  height: 7cqw;
+  border-radius: 50%;
+  background: #1d3b6e;
+  color: #fff;
+  font-size: 2.6cqw;
+  font-weight: 700;
+}
+.mv__head {
+  display: grid;
+  gap: 1.2cqw;
+  padding: 3.4cqw;
+  border-radius: 3cqw;
+  background: #1d3b6e;
+  color: #fff;
+}
+.mv__head small {
+  color: rgba(255, 255, 255, 0.7);
+}
+.mv__head b {
+  font-size: 4.4cqw;
+}
+.mv__progress {
+  height: 1.8cqw;
+  margin-top: 1cqw;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+.mv__progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #f2b705;
+}
+.mv__grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 2.6cqw;
+  min-height: 0;
+}
+.mv__steps {
+  display: grid;
+  align-content: start;
+  gap: 2.4cqw;
+  margin: 0;
+  padding: 3cqw;
+  border-radius: 3cqw;
+  background: #fff;
+  list-style: none;
+  font-size: 2.9cqw;
+}
+.mv__steps li {
+  display: flex;
+  align-items: center;
+  gap: 2cqw;
+  color: #8a8f98;
+}
+.mv__steps i {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 4.6cqw;
+  height: 4.6cqw;
+  border-radius: 50%;
+  border: 0.5cqw solid #c8cdd6;
+  color: #fff;
+}
+.mv__steps i svg {
+  width: 3cqw;
+  height: 3cqw;
+}
+.mv__steps .is-done {
+  color: #1c1c1e;
+}
+.mv__steps .is-done i {
+  border-color: #23a26d;
+  background: #23a26d;
+}
+.mv__steps .is-now {
+  color: #1d3b6e;
+  font-weight: 700;
+}
+.mv__steps .is-now i {
+  border-color: #f2b705;
+  box-shadow: 0 0 0 1cqw rgba(242, 183, 5, 0.25);
+}
+.mv__side {
+  display: grid;
+  gap: 2.6cqw;
+  align-content: start;
+}
+.mv__card {
+  display: grid;
+  gap: 0.6cqw;
+  padding: 2.6cqw 3cqw;
+  border-radius: 3cqw;
+  background: #fff;
+}
+.mv__card b {
+  font-size: 4.2cqw;
+  color: #1d3b6e;
+}
+.mv__photos {
+  display: flex;
+  gap: 1.4cqw;
+  margin-top: 0.8cqw;
+}
+.mv__photos i {
+  flex: 1;
+  height: 8cqw;
+  border-radius: 1.6cqw;
+  background: linear-gradient(160deg, #c9b28c, #8b7355);
+}
+.mv__photos i:nth-child(2) {
+  background: linear-gradient(160deg, #a7b6c7, #5d6f86);
+}
+.mv__photos i:nth-child(3) {
+  background: linear-gradient(160deg, #d8c9a8, #a08b62);
+}

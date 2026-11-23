@@ -1,0 +1,403 @@
+.nav.is-open {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-color: transparent;
+}
+
+/* ---------- Parcours → Compétences : on resserre la transition ---------- */
+.parcours {
+  padding-bottom: clamp(32px, 5vw, 60px);
+}
+.skills {
+  padding-top: clamp(32px, 5vw, 60px);
+}
+
+/* ---------- 03 · Compétences : deux collections, des étiquettes de couture ---------- */
+.skills .section-head {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .skills .section-head {
+    grid-template-columns: 1.3fr 1fr;
+    align-items: end;
+  }
+  .skills .section-head__meta {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Les deux collections, comme deux griffes */
+.lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: clamp(30px, 5vw, 56px) 0 clamp(34px, 5vw, 60px);
+}
+.line {
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+  min-width: 230px;
+  padding: 16px 24px 15px;
+  border: 1px solid rgba(217, 184, 120, 0.32);
+  border-radius: 16px;
+  background: rgba(14, 15, 17, 0.55);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.35s var(--ease), color 0.35s, border-color 0.35s, transform 0.35s var(--ease);
+}
+.line:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+.line:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 3px;
+}
+.line__count {
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.line__count {
+  opacity: 0.75;
+}
+.line__name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  line-height: 1.05;
+}
+.line.is-active {
+  border-color: transparent;
+  background: var(--gold-sheen);
+  color: #17181b;
+  box-shadow: 0 14px 34px -14px rgba(217, 184, 120, 0.55);
+}
+.line.is-active .line__count {
+  color: #4a3a1c;
+}
+
+/* Le portant : chaque étiquette porte son bout de barre, ce qui fait une barre continue par rangée */
+.rack__list {
+  --gap: 22px;
+  --drop: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 34px var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.htag {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--drop);
+  filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.55));
+}
+.htag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(var(--gap) / -2);
+  right: calc(var(--gap) / -2);
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #f6e2b0, #b8914f 70%, #8c6a33);
+}
+.htag__string {
+  position: absolute;
+  z-index: 0;
+  top: 2px;
+  left: 50%;
+  width: 1.5px;
+  height: calc(var(--drop) + 22px);
+  background: linear-gradient(var(--gold-light), var(--gold));
+  transform: translateX(-50%);
+}
+.htag__card {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 214px;
+  padding: 46px 20px 16px;
+  border-radius: 16px 16px 8px 8px;
+  transform-origin: 50% 22px;
+  /* le trou de l'étiquette, vraiment percé */
+  -webkit-mask: radial-gradient(circle 6px at 50% 22px, transparent 96%, #000 100%);
+  mask: radial-gradient(circle 6px at 50% 22px, transparent 96%, #000 100%);
+}
+/* étiquettes noires au liseré doré */
+.htag__card {
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.07), transparent 45%),
+    #121316;
+  box-shadow: inset 0 0 0 1px rgba(217, 184, 120, 0.45);
+  color: var(--ink);
+}
+/* l'œillet doré autour du trou */
+.htag__hole {
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid #c9a35f;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(0, 0, 0, 0.25);
+  transform: translateX(-50%);
+}
+.htag__ref {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.htag__ref {
+  opacity: 0.6;
+}
+.htag__name {
+  margin: 10px 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 1.9vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.04;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  color: var(--gold-light);
+}
+.htag__rule {
+  width: 34px;
+  height: 1px;
+  margin: 16px 0 12px;
+  background: currentColor;
+  opacity: 0.45;
+}
+.htag__note {
+  margin: 6px 0 18px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  opacity: 0.85;
+}
+
+/* au survol, l'étiquette se balance sur son fil */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .htag:hover .htag__card {
+    animation: htag-swing 1.2s ease-out;
+  }
+}
+@keyframes htag-swing {
+  20% { transform: rotate(5deg); }
+  45% { transform: rotate(-3.5deg); }
+  70% { transform: rotate(1.5deg); }
+  100% { transform: rotate(0); }
+}
+
+/* ---------- Téléphone ---------- */
+@media (max-width: 600px) {
+  .lines {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .line {
+    min-width: 0;
+    padding: 13px 14px 12px;
+  }
+  .line__name {
+    font-size: 1.15rem;
+  }
+  .line__count {
+    font-size: 0.56rem;
+    letter-spacing: 0.12em;
+  }
+  .rack__list {
+    --gap: 14px;
+    --drop: 24px;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 26px;
+  }
+  .htag__card {
+    min-height: 196px;
+    padding: 42px 14px 13px;
+  }
+  .htag__name {
+    font-size: 1.22rem;
+  }
+  .htag__note {
+    font-size: 0.78rem;
+  }
+}
+
+/* ---------- 04 · Hors écran ---------- */
+.hors__grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(20px, 3vw, 36px);
+}
+.biz {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  padding: clamp(28px, 4vw, 48px);
+  border-radius: calc(var(--radius) + 6px);
+  border: 1px solid var(--line);
+  background: linear-gradient(150deg, var(--code-soft), transparent 60%), var(--surface);
+  overflow: hidden;
+}
+/* le logo en petit carré, le nom de la boutique écrit en dessous */
+.biz__brand {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  margin: 4px 0;
+}
+.biz__logo {
+  display: block;
+  width: 92px;
+  height: 92px;
+  padding: 8px;
+  border-radius: 20px;
+  background: #fcfcfc;
+  box-shadow:
+    0 0 0 1px rgba(217, 184, 120, 0.6),
+    0 0 0 5px rgba(217, 184, 120, 0.12),
+    0 18px 34px -14px rgba(0, 0, 0, 0.8);
+}
+.biz__logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.biz__name {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.biz__name em {
+  margin: 0 0.32em 0 0.22em;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--gold-light);
+}
+.biz__kicker {
+  color: var(--code);
+}
+.biz p:not(.biz__kicker) {
+  color: var(--ink-soft);
+  max-width: 460px;
+}
+.biz__steps {
+  display: flex;
+  gap: 18px;
+  margin-top: 20px;
+}
+.biz__steps span {
+  width: 14px;
+  height: 22px;
+  border-radius: 50% 50% 45% 45%;
+  background: var(--ink-mute);
+  opacity: 0;
+  animation: step 2.8s ease-in-out infinite;
+}
+.biz__steps span:nth-child(even) {
+  transform: translateY(10px);
+}
+@keyframes step {
+  15%,
+  55% {
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 0;
+  }
+}
+
+.hors__field {
+  position: relative;
+  min-height: 380px;
+  border-radius: calc(var(--radius) + 6px);
+  border: 1px dashed var(--line-strong);
+  background: radial-gradient(circle at 50% 50%, var(--terr-soft), transparent 70%);
+  overflow: hidden;
+}
+.hors__label {
+  position: absolute;
+  left: 24px;
+  top: 22px;
+  color: var(--ink-mute);
+}
+.tag {
+  --px: 0px;
+  --py: 0px;
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 500;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  translate: var(--px) var(--py);
+  transition: translate 0.6s var(--ease);
+  animation: float 7s ease-in-out infinite;
+}
+.tag--0 {
+  left: 8%;
+  top: 16%;
+  color: var(--code);
+}
+.tag--1 {
+  right: 8%;
+  top: 35%;
+  color: var(--terr);
+}
+.tag--2 {
+  left: 16%;
+  top: 54%;
+  background: var(--blend);
+  color: var(--on-accent);
+  border-color: transparent;
+}
+.tag--3 {
+  right: 6%;
+  top: 73%;
+  color: var(--gold-light);
+}
+@keyframes float {
+  50% {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+}
+@media (max-width: 860px) {
+  .hors__grid {
+    grid-template-columns: 1fr;
+  }
+  .hors__field {
+    min-height: 320px;
+  }
+  .hors__field {
+    min-height: 400px;
+  }
+  .tag--1 {
+    right: 4%;
+  }
+  .tag--3 {
+    right: 4%;
+  }
+}

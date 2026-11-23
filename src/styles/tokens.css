@@ -1,0 +1,63 @@
+/* =========================================================
+   COULEURS DU SITE : ambiance unique « Noir et doré »
+   --terr = couleur du Territoire, --code = couleur du Code.
+   ========================================================= */
+
+:root {
+  color-scheme: dark;
+
+  --bg: #0e0f11;
+  --bg-deep: #0a0b0c;
+  --surface: rgba(255, 255, 255, 0.045);
+  --ink: #f5efe4;
+  --ink-soft: rgba(245, 239, 228, 0.74);
+  --ink-mute: rgba(245, 239, 228, 0.5);
+  --line: rgba(245, 239, 228, 0.1);
+  --line-strong: rgba(245, 239, 228, 0.2);
+
+  /* Territoire = or, Code = cuivre : deux métiers, une même famille de couleurs */
+  --terr: #d9b878;
+  --terr-soft: rgba(217, 184, 120, 0.14);
+  --code: #d9885c;
+  --code-soft: rgba(217, 136, 92, 0.14);
+  --on-accent: #17181b;
+
+  --gold: #d9b878;
+  --gold-light: #f6e2b0;
+  /* les trois dorés qui reviennent souvent : bouton, reflet satiné, pastille */
+  --gold-btn: linear-gradient(100deg, #a9803f, #e9cd92 50%, #b88b46);
+  --gold-sheen: linear-gradient(110deg, #e2c487, #f3dca5 50%, #cfa862);
+  --gold-chip: linear-gradient(135deg, #e9cd92, #a9803f);
+  --gold-text: linear-gradient(100deg, #a9803f 0%, #f6e2b0 25%, #c9a25e 45%, #fff1cc 60%, #b88b46 80%, #e9cd92 100%);
+
+  --shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.85);
+  --grain-opacity: 0.06;
+
+  --blend: linear-gradient(100deg, var(--terr), var(--code));
+
+  --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+  --font-sans: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sign: 'Mrs Saint Delafield', cursive;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+
+  --container: 1240px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --radius: 18px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+/* =========================================================
+   PANNEAUX SOMBRES (Accueil, À propos, Services, Contact) : un noir un peu plus clair
+   ========================================================= */
+.is-dark,
+.hero-dark .nav {
+  --bg: #17181b;
+  --surface: rgba(255, 255, 255, 0.05);
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.2);
+  --blend: linear-gradient(100deg, #a9803f, #f6e2b0, #c9a25e);
+  --shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.8);
+  color: var(--ink);
+  color-scheme: dark;
+}

@@ -1,0 +1,180 @@
+/* =========================================================
+   ACCUEIL : un rayon de lumière sur l'horizon, puis ton nom
+   ========================================================= */
+.hero.is-dark {
+  --mx: 0;
+  --my: 0;
+  position: relative;
+  /* un peu moins haut que l'écran : la section suivante arrive plus vite */
+  height: 86vh;
+  height: 86svh;
+  min-height: 560px;
+  overflow: hidden;
+  background: #0c0d0f;
+}
+.hero__stage {
+  position: absolute;
+  inset: 0;
+  perspective: 1600px;
+}
+
+/* ---------- Le rayon de lumière ---------- */
+.beam {
+  position: absolute;
+  left: calc(50% + var(--mx) * 24px);
+  top: 0;
+  width: 2px;
+  height: 64%;
+  margin-left: -1px;
+  background: linear-gradient(180deg, transparent, rgba(246, 226, 176, 0.18) 28%, rgba(255, 243, 214, 0.85) 88%, #fff);
+  box-shadow: 0 0 14px 1px rgba(246, 226, 176, 0.35);
+  transition: left 1.2s var(--ease);
+  z-index: 1;
+}
+.beam::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 320px;
+  height: 100%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse 40% 100% at 50% 100%, rgba(246, 226, 176, 0.13), transparent 70%);
+  pointer-events: none;
+}
+.beam::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 180px;
+  height: 22px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(255, 246, 222, 0.9), rgba(246, 226, 176, 0.25) 45%, transparent);
+}
+
+/* ---------- L'horizon (le bord d'une planète, vu de très loin) ---------- */
+.horizon {
+  position: absolute;
+  left: 50%;
+  top: 64%;
+  width: 240vw;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  z-index: 1;
+}
+.horizon__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse 50% 6% at 50% 0%, #1d1c19, #0c0d0f 70%);
+  box-shadow: 0 -40px 120px -40px rgba(246, 226, 176, 0.28);
+}
+.horizon__rim {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-top-color: rgba(246, 226, 176, 0.75);
+  -webkit-mask-image: linear-gradient(90deg, transparent 32%, #000 50%, transparent 68%);
+  mask-image: linear-gradient(90deg, transparent 32%, #000 50%, transparent 68%);
+}
+
+/* ---------- 1. L'ouverture ---------- */
+.opening {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  padding: clamp(96px, 12vh, 128px) var(--gutter) 0;
+  text-align: center;
+  transform: translateY(-5vh);
+}
+.opening__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.opening__kicker span {
+  color: var(--gold);
+}
+.opening__name {
+  margin: 0.32em 0 0.3em;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(3.4rem, 10.5vw, 10rem);
+  line-height: 0.86;
+  letter-spacing: -0.035em;
+  color: #f5efe4;
+}
+.opening__name > span {
+  display: block;
+  overflow: hidden;
+  padding: 0 0.06em 0.08em;
+}
+.opening__name > span > span {
+  display: inline-block;
+}
+.opening__lead {
+  max-width: 50ch;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  line-height: 1.65;
+}
+.opening__lead i {
+  font-family: var(--font-serif);
+  color: var(--gold);
+}
+.opening__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+.hero-btn {
+  isolation: isolate;
+  overflow: hidden;
+}
+.hero-btn--gold {
+  background: var(--gold-btn);
+  color: #17181b;
+}
+.hero-btn--gold::before {
+  background: #fff1cc;
+}
+.hero-btn--line {
+  border: 1px solid rgba(245, 239, 228, 0.28);
+  color: #f5efe4;
+  transition: color 0.4s;
+}
+.hero-btn--line::before {
+  background: #f5efe4;
+}
+.hero-btn--line:hover {
+  color: #17181b;
+}
+
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateX(-50%);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
