@@ -47,14 +47,16 @@ type FieldProps = {
   autoComplete?: string
   required?: boolean
   multiline?: boolean
+  /** Longueur maximale : évite les envois géants */
+  maxLength: number
 }
 
 /** Un champ du formulaire : l'étiquette flotte au-dessus quand on écrit. */
-function Field({ label, value, onChange, type = 'text', autoComplete, required, multiline }: FieldProps) {
+function Field({ label, value, onChange, type = 'text', autoComplete, required, multiline, maxLength }: FieldProps) {
   return (
     <label className="field">
       {multiline ? (
-        <textarea rows={5} value={value} onChange={(e) => onChange(e.target.value)} placeholder=" " required={required} />
+        <textarea rows={5} value={value} onChange={(e) => onChange(e.target.value)} placeholder=" " required={required} maxLength={maxLength} />
       ) : (
         <input
           type={type}
@@ -63,6 +65,7 @@ function Field({ label, value, onChange, type = 'text', autoComplete, required, 
           placeholder=" "
           autoComplete={autoComplete}
           required={required}
+          maxLength={maxLength}
         />
       )}
       <span>{label}</span>
@@ -222,12 +225,18 @@ export default function Contact() {
     event.preventDefault()
     setErrorMessage('')
 
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+    // On retire les espaces inutiles au début et à la fin de chaque champ
+    const name = form.name.trim()
+    const email = form.email.trim()
+    const subject = form.subject.trim()
+    const message = form.message.trim()
+
+    if (!name || !email || !message) {
       setStatus('error')
       setErrorMessage(c.contact.required)
       return
     }
-    if (!EMAIL_REGEX.test(form.email)) {
+    if (!EMAIL_REGEX.test(email)) {
       setStatus('error')
       setErrorMessage(c.contact.invalidEmail)
       return
@@ -236,9 +245,8 @@ export default function Contact() {
 
     if (!direct) {
       // Sans clé : on ouvre la messagerie du visiteur avec le message déjà rempli
-      const subject = form.subject || c.contact.mailtoSubject
-      const body = `${form.message}\n\n— ${form.name} (${form.email})`
-      window.location.href = `${links.mail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      const body = `${message}\n\n— ${name} (${email})`
+      window.location.href = `${links.mail}?subject=${encodeURIComponent(subject || c.contact.mailtoSubject)}&body=${encodeURIComponent(body)}`
       setStatus('mailto')
       return
     }
@@ -250,10 +258,10 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: site.web3formsKey,
-          name: form.name,
-          email: form.email,
-          subject: form.subject || c.contact.web3formsSubject,
-          message: form.message,
+          name,
+          email,
+          subject: subject || c.contact.web3formsSubject,
+          message,
           botcheck: form.botcheck,
         }),
       })
@@ -417,7 +425,7 @@ export default function Contact() {
 
           <form className="form" id="contact-form" onSubmit={handleSubmit} noValidate>
             <div className="form__row">
-              <Field label={c.contact.name} value={form.name} onChange={(v) => update('name', v)} autoComplete="name" required />
+              <Field label={c.contact.name} value={form.name} onChange={(v) => update('name', v)} autoComplete="name" required maxLength={100} />
               <Field
                 label={c.contact.email}
                 type="email"
@@ -425,10 +433,11 @@ export default function Contact() {
                 onChange={(v) => update('email', v)}
                 autoComplete="email"
                 required
+                maxLength={150}
               />
             </div>
-            <Field label={c.contact.subject} value={form.subject} onChange={(v) => update('subject', v)} />
-            <Field label={c.contact.message} value={form.message} onChange={(v) => update('message', v)} required multiline />
+            <Field label={c.contact.subject} value={form.subject} onChange={(v) => update('subject', v)} maxLength={150} />
+            <Field label={c.contact.message} value={form.message} onChange={(v) => update('message', v)} required multiline maxLength={3000} />
 
             <input
               className="form__honeypot"

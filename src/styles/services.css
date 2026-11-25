@@ -293,8 +293,9 @@
   .key__more .svc-detail__title {
     font-size: 1.6rem;
   }
+  /* plus bas : la dernière touche (avec son relief) ne la recouvre plus */
   .svc-note {
-    margin-top: 36px;
+    margin-top: 80px;
   }
 }
 @media (max-width: 420px) {
