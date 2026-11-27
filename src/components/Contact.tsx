@@ -24,6 +24,7 @@ import { useI18n } from '../i18n/LanguageContext'
 import { links } from '../lib/links'
 import { usePointer, useScrollScene } from '../hooks/useMotion'
 import Magnetic from './Magnetic'
+import ExternalLink from './ExternalLink'
 
 /** Icônes des étapes, dans le même ordre dans les deux langues. */
 const STEP_ICONS = [Lightbulb, MapPin, PenTool, Rocket]
@@ -414,9 +415,9 @@ export default function Contact() {
                       </a>
                     )}
                     {site.whatsapp && (
-                      <a className="gcard__btn" href={links.whatsapp} target="_blank" rel="noreferrer">
+                      <ExternalLink className="gcard__btn" href={links.whatsapp}>
                         WhatsApp
-                      </a>
+                      </ExternalLink>
                     )}
                   </div>
                 </div>

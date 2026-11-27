@@ -234,6 +234,31 @@ html {
 .btn--primary::before {
   background: var(--ink);
 }
+/* Les deux boutons du site (nés dans l'accueil) : doré plein, ou contour clair */
+.btn--gold {
+  background: var(--gold-btn);
+  color: #17181b;
+}
+.btn--gold::before {
+  background: #fff1cc;
+}
+.btn--line {
+  border: 1px solid rgba(245, 239, 228, 0.28);
+  color: #f5efe4;
+  transition: color 0.4s;
+}
+.btn--line::before {
+  background: #f5efe4;
+}
+.btn--line:hover {
+  color: #17181b;
+}
+/* version plus petite, pour l'intérieur des cartes */
+.btn--sm {
+  gap: 8px;
+  padding: 11px 20px;
+  font-size: 0.9rem;
+}
 .btn--wide {
   width: 100%;
 }

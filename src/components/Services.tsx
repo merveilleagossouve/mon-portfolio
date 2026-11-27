@@ -19,6 +19,7 @@ import { gsap } from '../lib/gsap'
 import { type Content } from '../data/content'
 import { useI18n } from '../i18n/LanguageContext'
 import { useChangeAnimation, useScrollScene } from '../hooks/useMotion'
+import Magnetic from './Magnetic'
 
 type Service = Content['services']['items'][number]
 
@@ -110,9 +111,11 @@ export default function Services() {
               <Detail s={services[active]} />
             </div>
 
-            <a href="#contact" className="svc-cta">
-              {c.services.cta} <ArrowUpRight size={17} />
-            </a>
+            <Magnetic>
+              <a href="#contact" className="btn btn--gold svc-cta">
+                {c.services.cta} <ArrowUpRight size={17} />
+              </a>
+            </Magnetic>
           </div>
 
           <div className="keys">

@@ -96,12 +96,12 @@ export default function Hero() {
           </p>
           <div className="opening__actions">
             <Magnetic>
-              <a href="#projets" className="btn hero-btn hero-btn--gold">
+              <a href="#projets" className="btn btn--gold">
                 {c.ui.seeProjects} <ArrowUpRight size={18} />
               </a>
             </Magnetic>
             <Magnetic>
-              <a href="#contact" className="btn hero-btn hero-btn--line">
+              <a href="#contact" className="btn btn--line">
                 {c.ui.contactMe}
               </a>
             </Magnetic>

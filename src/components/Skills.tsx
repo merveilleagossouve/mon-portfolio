@@ -3,6 +3,7 @@ import { gsap } from '../lib/gsap'
 import { type SkillSide } from '../data/content'
 import { useI18n } from '../i18n/LanguageContext'
 import { useChangeAnimation, useScrollScene } from '../hooks/useMotion'
+import { pad2 } from '../lib/format'
 import SectionHead from './SectionHead'
 
 const LINES: SkillSide[] = ['code', 'territoire']
@@ -61,7 +62,7 @@ export default function Skills() {
             >
               <span className="line__name">{c.skills.labels[side]}</span>
               <span className="line__count mono">
-                {String(count(side)).padStart(2, '0')} {c.skills.pieces}
+                {pad2(count(side))} {c.skills.pieces}
               </span>
             </button>
           ))}
@@ -74,7 +75,7 @@ export default function Skills() {
                 <span className="htag__string" aria-hidden="true" />
                 <div className="htag__card">
                   <span className="htag__hole" aria-hidden="true" />
-                  <span className="htag__ref mono">N° {String(i + 1).padStart(2, '0')}</span>
+                  <span className="htag__ref mono">N° {pad2(i + 1)}</span>
                   <h3 className="htag__name">{s.name}</h3>
                   <span className="htag__rule" aria-hidden="true" />
                   <p className="htag__note">{s.note}</p>

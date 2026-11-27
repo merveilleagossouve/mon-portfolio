@@ -27,6 +27,16 @@ function Station({ item }: { item: ParcoursItem }) {
   )
 }
 
+/** Une courbe de la ligne de métro : la voie Aménagement et la voie Développement se séparent ou se rejoignent. */
+function Curve({ step, terr, code }: { step: number; terr: string; code: string }) {
+  return (
+    <svg className="metro__curve" viewBox="0 0 1040 90" preserveAspectRatio="none" aria-hidden="true">
+      <path data-step={step} className="metro__seg metro__path--terr" d={terr} pathLength={1} />
+      <path data-step={step} className="metro__seg metro__path--code" d={code} pathLength={1} />
+    </svg>
+  )
+}
+
 export default function Parcours() {
   const { c } = useI18n()
   const parcours = c.parcours.items
@@ -72,10 +82,7 @@ export default function Parcours() {
             </div>
           )}
 
-          <svg className="metro__curve" viewBox="0 0 1040 90" preserveAspectRatio="none" aria-hidden="true">
-            <path data-step="1" className="metro__seg metro__path--terr" d="M520 0 C520 55, 260 35, 260 90" pathLength={1} />
-            <path data-step="1" className="metro__seg metro__path--code" d="M520 0 C520 55, 780 35, 780 90" pathLength={1} />
-          </svg>
+          <Curve step={1} terr="M520 0 C520 55, 260 35, 260 90" code="M520 0 C520 55, 780 35, 780 90" />
 
           <div className="metro__row metro__row--lanes">
             <span className="metro__seg metro__line metro__line--terr" data-step="2" />
@@ -110,10 +117,7 @@ export default function Parcours() {
             </div>
           </div>
 
-          <svg className="metro__curve" viewBox="0 0 1040 90" preserveAspectRatio="none" aria-hidden="true">
-            <path data-step="3" className="metro__seg metro__path--terr" d="M260 0 C260 55, 520 35, 520 90" pathLength={1} />
-            <path data-step="3" className="metro__seg metro__path--code" d="M780 0 C780 55, 520 35, 520 90" pathLength={1} />
-          </svg>
+          <Curve step={3} terr="M260 0 C260 55, 520 35, 520 90" code="M780 0 C780 55, 520 35, 520 90" />
 
           {end && (
             <div className="metro__row metro__row--center metro__row--end">

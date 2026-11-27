@@ -121,19 +121,7 @@
   background: var(--gold);
 }
 .svc-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   margin-top: 24px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid rgba(217, 184, 120, 0.5);
-  font-weight: 600;
-  color: var(--gold-light);
-  transition: gap 0.3s var(--ease), border-color 0.3s;
-}
-.svc-cta:hover {
-  gap: 14px;
-  border-color: var(--gold-light);
 }
 
 /* ---------- Les touches ---------- */

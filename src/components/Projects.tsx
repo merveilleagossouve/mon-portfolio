@@ -7,6 +7,7 @@ import { useI18n } from '../i18n/LanguageContext'
 import { usePointer } from '../hooks/useMotion'
 import SectionHead from './SectionHead'
 import { FoodStoreMock, VigiBatMock } from './ProjectMocks'
+import ExternalLink from './ExternalLink'
 
 /** La capture en grand, par-dessus le site. Un clic ou la touche Échap la referme. */
 function Lightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
@@ -42,17 +43,6 @@ function Preview({ project, interactive }: { project: Project; interactive: bool
         </span>
         <span className="pshot__url">{project.name}</span>
         {!project.image && <span className="pshot__tag">{c.projects.mockTag}</span>}
-        {project.link && (
-          <a
-            className="pshot__visit"
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
-            tabIndex={interactive ? 0 : -1}
-          >
-            {c.projects.visit} <ArrowUpRight size={12} />
-          </a>
-        )}
       </div>
       <div className="pshot__screen">
         {project.image ? (
@@ -132,7 +122,7 @@ function ProjectCard({ project }: { project: Project }) {
             ))}
           </ul>
           <button
-            className="pcard__flip"
+            className="btn btn--gold btn--sm pcard__flip"
             onClick={() => setFlipped(true)}
             tabIndex={flipped ? -1 : 0}
           >
@@ -151,12 +141,17 @@ function ProjectCard({ project }: { project: Project }) {
           <Preview project={project} interactive={flipped} />
           <div className="pcard__actions">
             <button
-              className="pcard__flip"
+              className="btn btn--line btn--sm pcard__flip"
               onClick={() => setFlipped(false)}
               tabIndex={flipped ? 0 : -1}
             >
               <ArrowLeft size={16} /> {c.projects.back}
             </button>
+            {project.link && (
+              <ExternalLink className="btn btn--gold btn--sm" href={project.link} tabIndex={flipped ? 0 : -1}>
+                {c.projects.visit} <ArrowUpRight size={16} />
+              </ExternalLink>
+            )}
           </div>
         </div>
         <span className="pcard__glare" aria-hidden="true" />
@@ -218,7 +213,7 @@ export default function Projects() {
             <br />
             <em>{c.projects.nextB}</em>
           </strong>
-          <span className="projects__next-cta">
+          <span className="btn btn--gold projects__next-cta">
             {c.projects.nextCta} <ArrowUpRight size={18} />
           </span>
         </a>

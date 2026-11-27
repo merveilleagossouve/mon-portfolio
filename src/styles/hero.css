@@ -142,28 +142,6 @@
   gap: 14px;
   margin-top: 30px;
 }
-.hero-btn {
-  isolation: isolate;
-  overflow: hidden;
-}
-.hero-btn--gold {
-  background: var(--gold-btn);
-  color: #17181b;
-}
-.hero-btn--gold::before {
-  background: #fff1cc;
-}
-.hero-btn--line {
-  border: 1px solid rgba(245, 239, 228, 0.28);
-  color: #f5efe4;
-  transition: color 0.4s;
-}
-.hero-btn--line::before {
-  background: #f5efe4;
-}
-.hero-btn--line:hover {
-  color: #17181b;
-}
 
 .hero__scroll {
   position: absolute;
